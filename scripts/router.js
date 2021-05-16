@@ -5,7 +5,7 @@ export const router = {};
 /**
  * Changes the "page" (state) that your SPA app is currently set to
  */
-router.setState = function() {
+ router.setState = function(strPage, intFlag, selectedPostEntry) { // Add a string paramter to know what was clicked
   /**
    * - There are three states that your SPA app will have
    *    1. The home page
@@ -35,4 +35,84 @@ router.setState = function() {
    *    1. You may add as many helper functions in this file as you like
    *    2. You may modify the parameters of setState() as much as you like
    */
+
+  /* Push a new state object:
+    * const state = { 'page_id': 1, 'user_id': 5 }
+    * const title = ''
+    * const url = 'hello-world.html'
+    * history.pushState(state, title, url)
+  */
+
+  if (strPage == 'Settings')    // User clicked settings
+  {
+    const state = { 'page_id': 'Settings' };
+    const title = 'settings';
+    const url = '/#settings';  
+
+    // have an if statement here for poppstate. Dont want to do it for popstate
+    if (intFlag == 1)
+    {
+      history.pushState(state, title, url);
+    }
+
+    // Change the header:
+    document.querySelector('h1').innerHTML = "Settings";
+
+    // Change the settings class body, so CSS can take over:
+    document.querySelector('body').className = "settings";
+
+  }
+  else if (strPage == "Head")    // User clicked the header
+  {
+    const state = { 'page_id': 'Head' };
+    const title = 'Journal Entries'
+    const url = '/';
+
+    // have an if statement here for poppstate. Dont want to do it for popstate
+    if (intFlag == 1)
+    {
+      history.pushState(state, title, url); // url is like a relative link
+    }
+
+     // Change the header:
+     document.querySelector('h1').innerHTML = "Journal Entries";
+
+    // Change the settings class body, so CSS can take over:
+    document.querySelector('body').className = "";  // remove previous class name
+  }
+  else if (strPage == "Entry")
+  {
+    //console.log("test: " + selectedPostEntry.id);
+    const state = { 'page_id': 'Entry'};
+    const title = 'Entries';
+    const url = '/#entry' + selectedPostEntry.id; 
+
+    // Add the journal information :
+    let entryPage = document.createElement('entry-page');   // Will delete and insert a new <entry-page> element 
+    let preEntry =  document.querySelector('entry-page');   
+
+    entryPage.entry = selectedPostEntry.entry;
+
+    document.querySelector('body').removeChild(preEntry);
+    document.querySelector('body').appendChild(entryPage);
+
+    if (intFlag == 1)
+    {
+
+      history.pushState(state, title, url); // url is like a relative link
+    }
+
+    // Change the header:
+    document.querySelector('h1').innerHTML = "Entry " + selectedPostEntry.id;
+
+    // Change the settings class body, so CSS can take over:
+    document.querySelector('body').className = "single-entry";  // Has a relationship with 'entry-page'
+  }
+  else
+  {
+    console.log("ERROR: This shouldn't have appeared!");
+
+  }
 }
+
+// helper functions out here if needed
