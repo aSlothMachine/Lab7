@@ -47,7 +47,7 @@ window.addEventListener('popstate', (event) => {
   }
   else if (event.state.page_id == 'Entry')
   {
-    setState('Entry', 0, -1);
+    setState('Entry', 0, newPost);
   }
 });
 
