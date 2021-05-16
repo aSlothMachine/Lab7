@@ -47,7 +47,7 @@ export const router = {};
   {
     const state = { 'page_id': 'Settings' };
     const title = 'settings';
-    const url = 'Lab7/#settings';  
+    const url = '/#settings';  
 
     // have an if statement here for poppstate. Dont want to do it for popstate
     if (intFlag == 1)
@@ -66,7 +66,7 @@ export const router = {};
   {
     const state = { 'page_id': 'Head' };
     const title = 'Journal Entries'
-    const url = 'Lab7/';
+    const url = '/';
 
     // have an if statement here for poppstate. Dont want to do it for popstate
     if (intFlag == 1)
@@ -85,7 +85,7 @@ export const router = {};
     //console.log("test: " + selectedPostEntry.id);
     const state = { 'page_id': 'Entry'};
     const title = 'Entries';
-    const url = 'Lab7/#entry' + selectedPostEntry.id; 
+    const url = '/#entry' + selectedPostEntry.id; 
 
     // Add the journal information :
     let entryPage = document.createElement('entry-page');   // Will delete and insert a new <entry-page> element 
